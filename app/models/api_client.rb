@@ -15,6 +15,18 @@ class ApiClient
     @page = page
   end
 
+  def offers
+    json_response = get_offers
+    hash_response = JSON.parse(json_response)
+    if hash_response['code'] == 'OK'
+      hash_response['offers'].map do |hash|
+        Offer.new_from_hash(hash)
+      end
+    else
+      []
+    end
+  end
+
   def get_offers
     request_url = "http://api.sponsorpay.com/feed/v1/offers.json?#{params_string}&hashkey=#{hashkey}"
 
@@ -24,12 +36,21 @@ class ApiClient
       http.request(request)
     end
 
-    case response
-    when Net::HTTPSuccess
-      response.body
+    if response.is_a? Net::HTTPSuccess
+      signature = response['X-Sponsorpay-Response-Signature']
+      if validate_signature(signature, response.body)
+        response.body
+      else
+        {'code' => 'Invalid response'}
+      end
     else
       response.value
     end
+  end
+
+  def validate_signature(response_signature, response_body)
+    valid_signature = Digest::SHA1.hexdigest("#{response_body}#{@api_key}")
+    response_signature == valid_signature
   end
 
   def params_string
