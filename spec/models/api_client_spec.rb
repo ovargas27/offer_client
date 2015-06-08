@@ -17,8 +17,7 @@ describe ApiClient do
     context "valid signature" do
       it do
         client = ApiClient.new('a', 'b', 1)
-        test_api_key = ENV.fetch("API_KEY")
-        sha1 = Digest::SHA1.hexdigest("{\"foo\":\"bar\"}#{test_api_key}")
+        valid = client.validate_signature('b1aebea01807bb3d651fa4ff62cf223e5a441785', "{\"foo\":\"bar\"}")
 
         expect(valid).to be true
       end
@@ -27,9 +26,8 @@ describe ApiClient do
     context "Invalid signature" do
       it do
         client = ApiClient.new('a', 'b', 1)
-        test_api_key = ENV.fetch("API_KEY")
-
         valid = client.validate_signature('this-is-invalid', "{\"foo\":\"bar\"}")
+
         expect(valid).to be false
       end
     end
