@@ -1,0 +1,22 @@
+%h1 Offers
+= form_for :search, url: {action: :index}, html: {method: :get} do |f|
+  .input-control
+    = f.label 'uid'
+    = f.text_field :uid
+  .input-control
+    = f.label 'pub0'
+    = f.text_field :pub0
+  .input-control
+    = f.label 'page'
+    = f.number_field :page
+  .actions
+    = f.submit "search"
+
+.offers
+  - flash.each do |key, value|
+    .alert{class: key}
+      = value
+
+  = unless @offers.nil?
+    = render(@offers) || "No offers available"
+

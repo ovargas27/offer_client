@@ -23,7 +23,7 @@ class ApiClient
         Offer.new_from_hash(hash)
       end
     else
-      []
+      raise "#{hash_response['code']}: #{hash_response['message']}"
     end
   end
 
@@ -41,7 +41,7 @@ class ApiClient
       if validate_signature(signature, response.body)
         response.body
       else
-        {'code' => 'Invalid response'}
+        raise "Something goes wrong, please contact support"
       end
     else
       response.value

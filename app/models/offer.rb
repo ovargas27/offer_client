@@ -8,5 +8,13 @@ class Offer
     end
     offer
   end
+
+  def to_partial_path
+    'offers/offer'
+  end
+
+  def thumbnail_lowres
+    thumbnail['lowres']
+  end
 end
 
