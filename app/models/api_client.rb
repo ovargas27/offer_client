@@ -1,3 +1,5 @@
+require 'net/http'
+
 class ApiClient
   attr_reader :api_key, :appid, :device_id, :ip, :locale, :offer_types, :page, :pub0, :timestamp, :uid
 

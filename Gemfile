@@ -1,6 +1,5 @@
 source 'https://rubygems.org'
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.0'
 # Use postgresql as the database for Active Record
@@ -47,4 +46,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'dotenv-rails', '1.0.2'
 end
+
+group :production do
+  gem 'rails_12factor'
+end
+
+ruby '2.1.3'
 
