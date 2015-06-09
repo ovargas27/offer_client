@@ -1,28 +1,18 @@
 == README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This App is a basic client to consume the Fyber API
 
-Things you may want to cover:
+It covers the following:
 
-* Ruby version
+- Make the request to the API including auth hash
+- Confirm that the response is real
+- Parse API response and create Offer objects
 
-* System dependencies
+As it display real time data from the API, the DB is not used,
+but it can be used to save offers localy and reduce the number of request
 
-* Configuration
+API KEY and other sensitive data are saved on env variables
 
-* Database creation
+ApiClient raise exception is somethig goes wrong or get a response different that 'OK'
+that way we don't have to be checking returnig values. not the best approach for real product, but good enough for a first draft
 
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
