@@ -17,6 +17,6 @@
     .alert{class: key}
       = value
 
-  = unless @offers.nil?
+  - if @offers
     = render(@offers) || "No offers available"
 
